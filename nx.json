@@ -8,10 +8,10 @@
     "nx.json": "*"
   },
   "projects": {
-    "test-cypress": {
+    "main": {
       "tags": []
     },
-    "test-cypress-e2e": {
+    "main-e2e": {
       "tags": []
     }
   }
