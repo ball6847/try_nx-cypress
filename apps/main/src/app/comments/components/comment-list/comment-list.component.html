@@ -1,0 +1,5 @@
+<ul>
+  <li *ngFor="let comment of comments$ | async">
+    <a href="javascript:" target="_blank" rel="noopener noreferrer">{{ comment.body }}</a> by <strong>{{ comment.email }}</strong>
+  </li>
+</ul>

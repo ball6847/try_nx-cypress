@@ -1,0 +1,17 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div>
+    <label>Name :</label>
+    <input type="text" formControlName="name">
+  </div>
+  <div>
+    <label>Email :</label>
+    <input type="email" formControlName="email">
+  </div>
+  <div>
+    <label>Comment :</label>
+    <textarea formControlName="body" cols="30" rows="10"></textarea>
+  </div>
+  <div>
+    <input type="submit" value="Submit">
+  </div>
+</form>
