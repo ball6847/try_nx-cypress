@@ -1,0 +1,142 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "test-cypress": {
+      "root": "apps/test-cypress/",
+      "sourceRoot": "apps/test-cypress/src",
+      "projectType": "application",
+      "prefix": "ball6847",
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/test-cypress",
+            "index": "apps/test-cypress/src/index.html",
+            "main": "apps/test-cypress/src/main.ts",
+            "polyfills": "apps/test-cypress/src/polyfills.ts",
+            "tsConfig": "apps/test-cypress/tsconfig.app.json",
+            "assets": [
+              "apps/test-cypress/src/favicon.ico",
+              "apps/test-cypress/src/assets"
+            ],
+            "styles": ["apps/test-cypress/src/styles.scss"],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/test-cypress/src/environments/environment.ts",
+                  "with": "apps/test-cypress/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "test-cypress:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "test-cypress:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "test-cypress:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/test-cypress/tsconfig.app.json",
+              "apps/test-cypress/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "apps/test-cypress/jest.config.js",
+            "tsConfig": "apps/test-cypress/tsconfig.spec.json",
+            "setupFile": "apps/test-cypress/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "test-cypress-e2e": {
+      "root": "apps/test-cypress-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/builders:cypress",
+          "options": {
+            "cypressConfig": "apps/test-cypress-e2e/cypress.json",
+            "tsConfig": "apps/test-cypress-e2e/tsconfig.e2e.json",
+            "devServerTarget": "test-cypress:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "test-cypress:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/test-cypress-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "defaultCollection": "@nrwl/schematics"
+  },
+  "schematics": {
+    "@nrwl/schematics:application": {
+      "style": "scss",
+      "framework": "angular"
+    },
+    "@nrwl/schematics:library": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "test-cypress"
+}
